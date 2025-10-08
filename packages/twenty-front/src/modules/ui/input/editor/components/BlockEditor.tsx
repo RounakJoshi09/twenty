@@ -129,6 +129,10 @@ const StyledEditor = styled.div`
     font-size: 0.9rem;
     background-color: ${({ theme }) => theme.background.transparent.light};
   }
+
+  // & .bn-block-outer {
+  //   margin-bottom: 8px;
+  // }
 `;
 
 export const BlockEditor = ({

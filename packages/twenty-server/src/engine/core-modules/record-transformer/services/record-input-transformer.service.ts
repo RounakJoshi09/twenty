@@ -3,6 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { FieldMetadataType } from 'twenty-shared/types';
 import { isDefined } from 'twenty-shared/utils';
 
+import { parseMarkdownToBlockNoteBlocks } from 'src/engine/core-modules/record-transformer/utils/custom-markdown-to-blocknote-parser.util';
 import { transformLinksValue } from 'src/engine/core-modules/record-transformer/utils/transform-links-value.util';
 import { transformPhonesValue } from 'src/engine/core-modules/record-transformer/utils/transform-phones-value.util';
 import { compositeTypeDefinitions } from 'src/engine/metadata-modules/field-metadata/composite-types';
@@ -109,11 +110,7 @@ export class RecordInputTransformerService {
     }
 
     const convertedBlocknote = parsedValue.markdown
-      ? JSON.stringify(
-          await serverBlockNoteEditor.tryParseMarkdownToBlocks(
-            parsedValue.markdown,
-          ),
-        )
+      ? JSON.stringify(parseMarkdownToBlockNoteBlocks(parsedValue.markdown))
       : null;
 
     return {
